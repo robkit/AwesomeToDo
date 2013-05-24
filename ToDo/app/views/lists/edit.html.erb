@@ -1,0 +1,16 @@
+<h1>Editing List #<%= @list.id %></h1>
+
+
+<%= form_tag(list_url(@list), method: 'put') do %>
+
+  <div>
+    <%= label_tag :title %><br />
+    <%= text_field_tag :title, @list.title %>
+  </div>
+
+  
+  <div>
+    <%= submit_tag "Update List" %>
+  </div>
+
+<% end %>

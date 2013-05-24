@@ -1,0 +1,42 @@
+<h1>Items</h1>
+
+<p><%= link_to 'Add a New Item', new_item_url %></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Task</th>
+      <th>Due</th>
+      <th>Priority</th>
+      <th>Status</th>
+      <th>List</th>
+      <th>Collaborator</th>
+      <th>Assigned By</th>
+      <th>Category</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% @items.each do |item| %>
+    <tr>
+      <td><%= item.task %></td>
+      <td><%= item.due %></td>
+      <td><%= item.priority %></td>
+      <td><%= item.status %></td>
+      <td><%= List.find_by_id(item.list_id).title %></td>
+      <td><%= Collaborator.find_by_id(item.collaborator_id).nickname %></td>
+      <td><%= User.find_by_id(item.user_id).name %></td>
+      <td><%= Category.find_by_id(item.category_id).category %></td>
+  
+      <td><%= link_to 'Show', item_url(item) %></td>
+      <td><%= link_to 'Edit', edit_item_url(item) %></td>
+      <td><%= link_to 'Destroy', item_url(item), method: 'delete', data: { confirm: "Do you really want to delete this item?" } %></td>
+
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+

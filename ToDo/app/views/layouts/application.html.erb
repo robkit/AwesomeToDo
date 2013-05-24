@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ToDo</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+  <header>
+    <h1>AwesomeToDo</h1>
+    <nav>
+      <%= link_to "Lists", lists_url %> |
+      <%= link_to "Items", items_url %> |
+      <%= link_to "Categories", categories_url %> |
+      <%= link_to "Collaborators", collaborators_url %> |
+
+      <% if session["user_id"].present? %>
+        Hello, <%= User.find_by_id(session["user_id"]).name %>!
+        <%= link_to "Sign Out", "/logout" %>
+      <% else %>
+        <%= link_to "Sign Up", new_user_url %>
+        <%#= link_to "Login", '/login' %>
+      <% end %>
+
+    </nav>
+
+  </header>
+
+  <div class="notice"><%= notice %></div>
+
+<%= yield %>
+
+</body>
+</html>
