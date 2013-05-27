@@ -1,5 +1,7 @@
 ToDo::Application.routes.draw do
   root :to => 'lists#index'
+  get '/about', controller: 'users', action: 'about', as: 'about'
+
   get '/login', controller: 'sessions', action: 'new'
   post '/sessions', controller: 'sessions', action: 'create'
   get "/logout", controller: 'sessions', action: 'destroy'
