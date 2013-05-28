@@ -2,13 +2,12 @@
 
 <p><%= link_to 'Add a New Collaborator', new_collaborator_url %></p>
 
-<table>
+<table class="table table-bordered table-striped table-hover">
   <thead>
     <tr>
       <th>Name</th>
       <th>Nickname</th>
       <th>User</th>
-      <th></th>
       <th></th>
       <th></th>
     </tr>
@@ -21,9 +20,8 @@
       <td><%= collaborator.nickname %></td>
       <td><%= User.find_by_id(collaborator.user_id).name %></td>
   
-      <td><%= link_to 'Show', collaborator_url(collaborator) %></td>
       <td><%= link_to 'Edit', edit_collaborator_url(collaborator) %></td>
-      <td><%= link_to 'Destroy', collaborator_url(collaborator), method: 'delete', data: { confirm: "Do you really want to delete this collaborator?" } %></td>
+      <td><%= link_to 'Delete', collaborator_url(collaborator), method: 'delete', data: { confirm: "Do you really want to delete this collaborator?" } %></td>
 
     </tr>
   <% end %>

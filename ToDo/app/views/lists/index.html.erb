@@ -1,28 +1,17 @@
 <h1>Lists</h1>
 
-<p><%= link_to 'Add a New List', new_list_url %></p>
+<table class="table table-bordered table-striped table-hover">
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
 
   <tbody>
   <% @lists.each do |list| %>
     <tr>
-      <td><%= list.title %></td>
-  
-      <td><%= link_to 'Show', list_url(list) %></td>
-      <td><%= link_to 'Edit', edit_list_url(list) %></td>
-      <td><%= link_to 'Destroy', list_url(list), method: 'delete', data: { confirm: "Do you really want to delete this list?" } %></td>
-
+      <td><h4><%= link_to list.title, list_url(list) %></h4></td>
     </tr>
   <% end %>
   </tbody>
 </table>
+
+
+<p><%= link_to '+ New List', new_list_url %></p>
 

@@ -1,50 +1,62 @@
 <h1>New Item</h1>
 
 
-<%= form_tag(items_url, method: 'post') do %>
 
-
-  <div>
-    <%= label_tag :task %><br />
-    <%= text_field_tag :task %>
-  </div>
-
-  <div>
-    <%= label_tag :collaborator_id %><br />
-    <%= select_tag :collaborator_id, options_from_collection_for_select(Collaborator.all, :id, :nickname) %>
-  </div>
-
-  <div>
-    <%= label_tag :list_id %><br />
-    <%= select_tag :list_id, options_from_collection_for_select(List.all, :id, :title) %>
-  </div>
-
-  <div>
-    <%= label_tag :category_id %><br />
-    <%= select_tag :category_id, options_from_collection_for_select(Category.all, :id, :category) %>
-  </div>
+  <%= form_tag(items_url, method: 'post') do %>
   
-  <div>
-    <%= label_tag :user_id %><br />
-    <%= select_tag :user_id, options_from_collection_for_select(User.all, :id, :name) %>
-  </div>
+    <div class="control-group">
+      <label class="control-label"><%= label_tag :task %></label>
+        <div class="controls">
+          <%= text_field_tag :task %>
+        </div>
+    </div>
 
-  <div>
-    <%= label_tag :due %><br />
-    <%= text_field_tag :due %>
-  </div>
+    <div class="control-group">
+      <label class="control-label"><%= label_tag :duedate %></label>
+        <div class="controls">
+          <%= text_field_tag :due %>
+        </div>
+    </div>
 
-  <div>
-    <%= label_tag :priority %><br />
-    <%= number_field_tag :priority %>
-  </div>
+    <div class="control-group">
+      <label class="control-label"><%= label_tag 'Priority level' %></label>
+        <div class="controls">
+          <%= number_field_tag :priority, nil, :in => 1...6%>
+        </div>
+    </div>
 
-  <div>
-    <%= label_tag :status %><br />
-    <%= check_box_tag :status? %>
-  </div>
+    <div class="control-group">
+      <label class="control-label"><%= label_tag :category_id %></label>
+        <div class="controls">
+          <%= select_tag :category_id, options_from_collection_for_select(Category.all, :id, :category) %>
+          <%= link_to 'Add a New Category', new_category_url %>
+        </div>
+    </div>
 
-  <div>
-    <%= submit_tag "Create Item" %>
-  </div>
-<% end %>
+    <div class="control-group">
+      <label class="control-label"><%= label_tag :list_id %></label>
+        <div class="controls">
+          <%= select_tag :list_id, options_from_collection_for_select(List.all, :id, :title) %>
+        </div>
+    </div>
+    
+    <div class="control-group">
+      <label class="control-label"><%= label_tag 'Assigned to' %></label>
+        <div class="controls">
+          <%= select_tag :collaborator_id, options_from_collection_for_select(User.all, :id, :nickname) %>
+        </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label"><%= label_tag 'Assigned by' %></label>
+        <div class="controls">
+          <%= select_tag :user_id, options_from_collection_for_select(User.all, :id, :nickname) %>
+        </div>
+    </div>
+
+
+    <div class="controls"><%= submit_tag "Add it!" %></div>
+    
+  <% end %>
+
+

@@ -32,7 +32,7 @@ class ListsController < ApplicationController
     @list.title = params[:title]
     
     if @list.save
-      redirect_to lists_url
+      redirect_to list_url(@list)
     else
       render 'new'
     end

@@ -18,13 +18,14 @@ class UsersController < ApplicationController
   def create
     @user = User.new
     @user.name = params[:name]
+    @user.nickname = params[:nickname]
     @user.email = params[:email]
     @user.password_digest = params[:password_digest]
     
     if @user.save
-      redirect_to users_url
+      redirect_to lists_url
     else
-      render 'new'
+      redirect_to new_user_url, notice: "Failed to create user profile."
     end
   end
 
@@ -35,13 +36,14 @@ class UsersController < ApplicationController
   def update
     @user = User.find_by_id(params[:id])
     @user.name = params[:name]
+    @user.nickname = params[:nickname]
     @user.email = params[:email]
     @user.password_digest = params[:password_digest]
-    
+
     if @user.save
       redirect_to users_url
     else
-      render 'new'
+      redirect_to users_url, notice: "Failed to create user profile."
     end
   end
 

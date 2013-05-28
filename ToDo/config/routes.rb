@@ -42,7 +42,7 @@ ToDo::Application.routes.draw do
 
   # Routes for the Item resource:
   # CREATE
-  get '/items/new', controller: 'items', action: 'new', as: 'new_item'
+  get '/lists/:id/items/new', controller: 'items', action: 'new', as: 'new_item'
   post '/items', controller: 'items', action: 'create'
 
   # READ
@@ -57,21 +57,21 @@ ToDo::Application.routes.draw do
   delete '/items/:id', controller: 'items', action: 'destroy'
   #------------------------------
 
-  # Routes for the Collaborator resource:
+  # Routes for the Collaborator resource: REMOVED FOR NOW, MAY USE MODEL IN FUTURE FEATURES
   # CREATE
-  get '/collaborators/new', controller: 'collaborators', action: 'new', as: 'new_collaborator'
-  post '/collaborators', controller: 'collaborators', action: 'create'
+  # get '/collaborators/new', controller: 'collaborators', action: 'new', as: 'new_collaborator'
+  # post '/collaborators', controller: 'collaborators', action: 'create'
 
-  # READ
-  get '/collaborators', controller: 'collaborators', action: 'index', as: 'collaborators'
-  get '/collaborators/:id', controller: 'collaborators', action: 'show', as: 'collaborator'
+  # # READ
+  # get '/collaborators', controller: 'collaborators', action: 'index', as: 'collaborators'
+  # get '/collaborators/:id', controller: 'collaborators', action: 'show', as: 'collaborator'
 
-  # UPDATE
-  get '/collaborators/:id/edit', controller: 'collaborators', action: 'edit', as: 'edit_collaborator'
-  put '/collaborators/:id', controller: 'collaborators', action: 'update'
+  # # UPDATE
+  # get '/collaborators/:id/edit', controller: 'collaborators', action: 'edit', as: 'edit_collaborator'
+  # put '/collaborators/:id', controller: 'collaborators', action: 'update'
 
-  # DELETE
-  delete '/collaborators/:id', controller: 'collaborators', action: 'destroy'
+  # # DELETE
+  # delete '/collaborators/:id', controller: 'collaborators', action: 'destroy'
   #------------------------------
 
   # Routes for the User resource:

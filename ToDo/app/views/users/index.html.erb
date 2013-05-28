@@ -1,13 +1,12 @@
 <h1>Users</h1>
 
-<p><%= link_to 'Add a New User', new_user_url %></p>
 
-<table>
+<table class="table table-bordered table-striped table-hover">
   <thead>
     <tr>
       <th>Name</th>
+      <th>Nickname</th>
       <th>Email</th>
-      <th></th>
       <th></th>
       <th></th>
     </tr>
@@ -17,11 +16,11 @@
   <% @users.each do |user| %>
     <tr>
       <td><%= user.name %></td>
+      <td><%= user.nickname %></td>
       <td><%= user.email %></td>
   
-      <td><%= link_to 'Show', user_url(user) %></td>
       <td><%= link_to 'Edit', edit_user_url(user) %></td>
-      <td><%= link_to 'Destroy', user_url(user), method: 'delete', data: { confirm: "Do you really want to delete this user?" } %></td>
+      <td><%= link_to 'Delete', user_url(user), method: 'delete', data: { confirm: "Do you really want to delete this user?" } %></td>
 
     </tr>
   <% end %>
