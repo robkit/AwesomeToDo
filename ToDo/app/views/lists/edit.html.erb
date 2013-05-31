@@ -1,17 +1,19 @@
-<h1>What do you want to change?</h1>
-
+<h1>Edit List</h1>
 
 <%= form_tag(list_url(@list), method: 'put') do %>
 
-  <p><%= label_tag :name %><%= text_field_tag :title, @list.title %></p>
+  <p><%= label_tag "List Title" %><%= text_field_tag :title, @list.title %></p>
+  <p><%= label_tag 'Add Collaborator' %><%= select_tag :collaborator_id, options_from_collection_for_select(User.all, :id, :nickname), :include_blank => true %></p>
+	
+	<ul class="nav nav-list"><h4>
+		<li class="nav-header">Current Collaborators:</li>
+		  <% @list.collaborators.each do |c| %>
+		 	<li><%= User.find_by_id(c.user_id).nickname %></li>
+		  <% end %>
+	</h4></ul><br>
 
-  <%= submit_tag "Save it!" %>
+  <%= submit_tag "Save Changes" %>
 
 <% end %>
 
-
-<%= form_tag(list_url(@list), method: 'delete', data: { confirm: "Do you really want to delete this list?" } ) do %>
-
-  <%= submit_tag "Get rid of it!" %>
-
-<% end %>
+<%= link_to 'Delete this list', list_url(@list), method: 'delete', data: { confirm: "Do you really want to delete this item?" } %>

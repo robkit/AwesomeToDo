@@ -5,13 +5,12 @@
   <thead>
     <tr>
       <th>Task</th>
-      <th>Duedate</th>
+      <!--<th>Duedate</th>
       <th>Priority Level</th>
-      <th>Done?</th>
+      <th>Done?</th>-->
       <th>Assigned to</th>
       <th>Assigned by</th>
       <th>Category</th>
-      <th></th>
       <th></th>
     </tr>
   </thead>
@@ -20,20 +19,19 @@
   <% @list.items.each do |item| %>
     <tr>
       <td><%= item.task %></td>
-      <td><%= item.due %></td>
+      <!--<td><%= item.due %></td>
       <td><%= item.priority %></td>
-      <td><%= item.status %></td>
+      <td><%= item.status %></td>-->
       <td><%= User.find_by_id(item.collaborator_id).nickname %></td>
       <td><%= User.find_by_id(item.user_id).nickname %></td>
       <td><%= Category.find_by_id(item.category_id).category %></td>
-  
-      <td><%= link_to 'Edit', edit_item_url(item) %></td>
-      <td><%= link_to 'Delete', item_url(item), method: 'delete', data: { confirm: "Do you really want to delete this item?" } %></td>
+
+      <td><a class="btn btn-primary" href=<%="#{item_url(item)}"%><%= link_to 'Done!', item_url(item), method: 'delete', data: { confirm: "Do you really want to delete this item?" } %></td>
 
     </tr>
   <% end %>
   </tbody>
 </table>
 
-<p class="pull-right"><%= link_to 'Edit List', edit_list_url(@list) %></p>
+<p class="pull-right"><%= link_to 'Edit/Delete List', edit_list_url(@list) %></p>
 <p><%= link_to '+ New Item', new_item_url(@list) %></p>

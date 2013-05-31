@@ -4,7 +4,7 @@
 <table class="table table-bordered table-striped table-hover">
   <thead>
     <tr>
-      <th>Name</th>
+      <th>Username</th>
       <th>Nickname</th>
       <th>Email</th>
       <th></th>
@@ -18,9 +18,8 @@
       <td><%= user.name %></td>
       <td><%= user.nickname %></td>
       <td><%= user.email %></td>
-  
-      <td><%= link_to 'Edit', edit_user_url(user) %></td>
-      <td><%= link_to 'Delete', user_url(user), method: 'delete', data: { confirm: "Do you really want to delete this user?" } %></td>
+      <td><a class="btn btn-primary" href=<%="#{edit_user_url(user)}"%><%= link_to 'Edit', edit_user_url(user) %></td>
+      <td><a class="btn btn-danger" href=<%="#{user_url(user)}"%><%= link_to 'Delete', user_url(user), method: 'delete', data: { confirm: "Do you really want to delete this user?" } %></td>
 
     </tr>
   <% end %>

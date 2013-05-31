@@ -1,9 +1,7 @@
 <h1>Editing Item</h1>
 
 
-
-
-  <%= form_tag(item_url(@item), method: 'put') do %>
+  <%= form_tag(item_url(@item), method: 'put', class: "form-horizontal well") do %>
   
     <div class="control-group">
       <label class="control-label"><%= label_tag :task %></label>
@@ -12,6 +10,7 @@
         </div>
     </div>
 
+    <!--
     <div class="control-group">
       <label class="control-label"><%= label_tag :duedate %></label>
         <div class="controls">
@@ -25,11 +24,12 @@
           <%= number_field_tag :priority, @item.priority, :in => 1...6%>
         </div>
     </div>
+    -->
 
     <div class="control-group">
       <label class="control-label"><%= label_tag :category_id %></label>
         <div class="controls">
-          <%= select_tag :category_id, options_from_collection_for_select(Category.all, :id, :category) %>
+          <%= select_tag :category_id, options_from_collection_for_select(Category.all, :id, :category)  %>
           <%= link_to 'Add a New Category', new_category_url %>
         </div>
     </div>
@@ -48,20 +48,7 @@
         </div>
     </div>
 
-    <div class="control-group">
-      <label class="control-label"><%= label_tag 'Assigned by' %></label>
-        <div class="controls">
-          <%= select_tag :user_id, options_from_collection_for_select(User.all, :id, :nickname) %>
-        </div>
-    </div>
-
-    <div class="control-group">
-      <label class="control-label"><%= label_tag :done? %></label>
-        <div class="controls">
-          <%= check_box_tag :status, @item.status %>
-        </div>
-    </div>
-
-    <div class="controls"><%= submit_tag "Update" %></div>
-    
+    <div class="controls"><%= submit_tag "Save Changes" %></div>
+  
   <% end %>
+

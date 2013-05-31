@@ -9,6 +9,16 @@ class ItemsController < ApplicationController
   end
 
   def new
+    @list = List.find_by_id(params[:id])
+    @collaborators= Array.new
+    count=0
+    @list.collaborators.each do |c|
+      listcollab=Hash.new
+      listcollab[:user_id] = c.user_id
+      listcollab[:nickname] = User.find_by_id(c.user_id).nickname
+      @collaborators[count] = listcollab
+      count = count + 1
+    end
   end
 
   def create

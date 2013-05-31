@@ -1,8 +1,7 @@
 <h1>New Item</h1>
 
 
-
-  <%= form_tag(items_url, method: 'post') do %>
+  <%= form_tag(items_url, method: 'post', class: "form-horizontal well") do %>
   
     <div class="control-group">
       <label class="control-label"><%= label_tag :task %></label>
@@ -10,6 +9,8 @@
           <%= text_field_tag :task %>
         </div>
     </div>
+
+    <!--
 
     <div class="control-group">
       <label class="control-label"><%= label_tag :duedate %></label>
@@ -25,6 +26,8 @@
         </div>
     </div>
 
+    -->
+
     <div class="control-group">
       <label class="control-label"><%= label_tag :category_id %></label>
         <div class="controls">
@@ -33,13 +36,8 @@
         </div>
     </div>
 
-    <div class="control-group">
-      <label class="control-label"><%= label_tag :list_id %></label>
-        <div class="controls">
-          <%= select_tag :list_id, options_from_collection_for_select(List.all, :id, :title) %>
-        </div>
-    </div>
-    
+          <%= hidden_field_tag :list_id, params[:id] %>
+
     <div class="control-group">
       <label class="control-label"><%= label_tag 'Assigned to' %></label>
         <div class="controls">
@@ -47,16 +45,9 @@
         </div>
     </div>
 
-    <div class="control-group">
-      <label class="control-label"><%= label_tag 'Assigned by' %></label>
-        <div class="controls">
-          <%= select_tag :user_id, options_from_collection_for_select(User.all, :id, :nickname) %>
-        </div>
-    </div>
+          <%= hidden_field_tag :user_id, session[:user_id] %>
 
-
-    <div class="controls"><%= submit_tag "Add it!" %></div>
+    <div class="controls"><%= submit_tag "Create Item" %></div>
     
   <% end %>
-
 

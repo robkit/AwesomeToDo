@@ -15,8 +15,12 @@ class ListsController < ApplicationController
   def create
     @list = List.new
     @list.title = params[:title]
-    
-    if @list.save
+    @list.save
+    @collaboration = Collaborator.new
+    @collaboration.list_id = @list.id
+    @collaboration.user_id = User.find_by_id(params[:collaborator_id]).id
+       
+    if @list.save && @collaboration.save
       redirect_to lists_url
     else
       render 'new'
@@ -30,7 +34,14 @@ class ListsController < ApplicationController
   def update
     @list = List.find_by_id(params[:id])
     @list.title = params[:title]
-    
+    @list.save
+    if params[:collaborator_id].present?
+      @collaboration = Collaborator.new
+      @collaboration.list_id = @list.id
+      @collaboration.user_id = User.find_by_id(params[:collaborator_id]).id
+      @collaboration.save
+    end
+       
     if @list.save
       redirect_to list_url(@list)
     else

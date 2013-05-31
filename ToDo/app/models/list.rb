@@ -1,7 +1,7 @@
 class List < ActiveRecord::Base
 
 	has_many :items
-	has_many :users
+	has_many :collaborators
 
 	validates :title, uniqueness: true
 

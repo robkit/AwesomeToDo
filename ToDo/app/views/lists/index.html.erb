@@ -1,17 +1,23 @@
-<h1>Lists</h1>
+<% if session[:user_id].present? %>
 
-<table class="table table-bordered table-striped table-hover">
+	<h1><%= User.find_by_id(session[:user_id]).nickname %>'s Lists</h1>
 
+	<table class="table table-bordered table-striped table-hover">
+	  <tbody>
+	  <% @lists.each do |list| %>
+	    <tr>
+	      <td><h4><%= link_to list.title, list_url(list) %></h4></td>
+	    </tr>
+	  <% end %>
+	  </tbody>
+	</table>
 
-  <tbody>
-  <% @lists.each do |list| %>
-    <tr>
-      <td><h4><%= link_to list.title, list_url(list) %></h4></td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+	<p><%= link_to '+ New List', new_list_url %></p>
 
+<% else %>
 
-<p><%= link_to '+ New List', new_list_url %></p>
+	<h1>Welcome!</h1>
+    <p class="lead">AwesomeToDo helps you organize your life.</p>
+    <p class="lead">Sign Up or Login above to get started.</p>
 
+<% end %>
