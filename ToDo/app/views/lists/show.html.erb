@@ -18,7 +18,7 @@
   <tbody>
   <% @list.items.each do |item| %>
     <tr>
-      <td><%= item.task %></td>
+      <td><b><%= link_to item.task, edit_item_url(item) %></b></td>
       <!--<td><%= item.due %></td>
       <td><%= item.priority %></td>
       <td><%= item.status %></td>-->

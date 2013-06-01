@@ -1,7 +1,7 @@
 class ListsController < ApplicationController
 
   def index
-    @lists = List.all
+    @mylists = User.find_by_id(session[:user_id])
   end
 
   def show
@@ -13,17 +13,29 @@ class ListsController < ApplicationController
   end
 
   def create
-    @list = List.new
-    @list.title = params[:title]
-    @list.save
-    @collaboration = Collaborator.new
-    @collaboration.list_id = @list.id
-    @collaboration.user_id = User.find_by_id(params[:collaborator_id]).id
-       
-    if @list.save && @collaboration.save
-      redirect_to lists_url
+    if params[:collaborator_id].present? && params[:collaborator_id] == session[:user_id].to_s
+      redirect_to new_list_url, notice: "Stop playing with yourself!"
     else
-      render 'new'
+      
+      @list = List.new
+      @list.title = params[:title]
+      @list.save
+      @owner = Collaborator.new
+      @owner.list_id = @list.id
+      @owner.user_id = session[:user_id]
+      
+      if params[:collaborator_id].present?
+        @collaboration = Collaborator.new
+        @collaboration.list_id = @list.id
+        @collaboration.user_id = params[:collaborator_id]
+        @collaboration.save
+      end
+
+      if @list.save  && @owner.save
+        redirect_to lists_url
+      else
+        render 'new'
+      end
     end
   end
 
@@ -36,10 +48,19 @@ class ListsController < ApplicationController
     @list.title = params[:title]
     @list.save
     if params[:collaborator_id].present?
-      @collaboration = Collaborator.new
-      @collaboration.list_id = @list.id
-      @collaboration.user_id = User.find_by_id(params[:collaborator_id]).id
-      @collaboration.save
+      check = Collaborator.find_all_by_list_id(params[:id])
+      match = 0
+      check.each do |collab|
+        if collab.user_id.to_s == params[:collaborator_id]
+          match = 1
+        end
+      end
+      if match == 0
+        @collaboration = Collaborator.new
+        @collaboration.list_id = @list.id
+        @collaboration.user_id = User.find_by_id(params[:collaborator_id]).id
+        @collaboration.save
+      end
     end
        
     if @list.save
@@ -51,7 +72,9 @@ class ListsController < ApplicationController
 
   def destroy
     @list = List.find_by_id(params[:id])
+    @list.collaborators.destroy_all
     @list.destroy
+
     redirect_to lists_url
   end
 end

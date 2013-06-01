@@ -48,6 +48,8 @@
         </div>
     </div>
 
+          <%= hidden_field_tag :user_id, session[:user_id] %>
+
     <div class="controls"><%= submit_tag "Save Changes" %></div>
   
   <% end %>

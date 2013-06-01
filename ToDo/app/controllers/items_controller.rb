@@ -1,7 +1,8 @@
 class ItemsController < ApplicationController
 
   def index
-    @items = Item.all
+    @myitems = Item.find_all_by_collaborator_id(session[:user_id])
+    @assigneditems = Item.find_all_by_user_id(session[:user_id])
   end
 
   def show
