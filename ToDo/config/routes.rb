@@ -32,7 +32,7 @@ ToDo::Application.routes.draw do
 
   # READ
   get '/categories', controller: 'categories', action: 'index', as: 'categories'
-  # get '/categories/:id', controller: 'categories', action: 'show', as: 'category'
+  get '/categories/:id', controller: 'categories', action: 'show', as: 'category'
 
   # UPDATE
   get '/categories/:id/edit', controller: 'categories', action: 'edit', as: 'edit_category'

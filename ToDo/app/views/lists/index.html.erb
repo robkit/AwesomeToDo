@@ -1,18 +1,37 @@
 <% if session[:user_id].present? %>
+	<% if User.find_by_id(session[:user_id]).name == "Admin" %>
+		
+		<h1>Manage Lists</h1>
 
-	<h1><%= User.find_by_id(session[:user_id]).nickname %>'s Lists</h1>
+		<table class="table table-bordered table-striped table-hover">
+		  <tbody>
+		  <% @lists.each do |list| %>
+		    <tr>
+		      <td><h4><%= link_to list.title, list_url(list) %></h4></td>
+		    </tr>
+		  <% end %>
+		  </tbody>
+		</table>
 
-	<table class="table table-bordered table-striped table-hover">
-	  <tbody>
-	  <% @mylists.collaborators.each do |list| %>
-	    <tr>
-	      <td><h4><%= link_to List.find_by_id(list.list_id).title, list_url(list.list_id) %></h4></td>
-	    </tr>
-	  <% end %>
-	  </tbody>
-	</table>
+		<p><%= link_to '+ New List', new_list_url %></p>
 
-	<p><%= link_to '+ New List', new_list_url %></p>
+	<% else %>
+
+		<h1><%= User.find_by_id(session[:user_id]).nickname %>'s Lists</h1>
+
+		<table class="table table-bordered table-striped table-hover">
+		  <tbody>
+		  <% @mylists.collaborators.each do |list| %>
+		    <tr>
+		      <td><h4><%= link_to List.find_by_id(list.list_id).title, list_url(list.list_id) %></h4></td>
+		    </tr>
+		  <% end %>
+		  </tbody>
+		</table>
+
+		<p><%= link_to '+ New List', new_list_url %></p>
+
+	<% end %>
 
 <% else %>
 

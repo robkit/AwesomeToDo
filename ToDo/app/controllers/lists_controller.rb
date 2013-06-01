@@ -1,15 +1,24 @@
 class ListsController < ApplicationController
 
   def index
+    @lists = List.all
     @mylists = User.find_by_id(session[:user_id])
   end
 
   def show
-    @list = List.find_by_id(params[:id])
+    if session[:user_id].present?
+      @list = List.find_by_id(params[:id])
+    else
+      redirect_to lists_url
+    end
   end
 
   def new
-    @list = List.new
+    if session[:user_id].present?
+      @list = List.new
+    else
+      redirect_to lists_url
+    end
   end
 
   def create
@@ -40,27 +49,34 @@ class ListsController < ApplicationController
   end
 
   def edit
-    @list = List.find_by_id(params[:id])
+    if session[:user_id].present?
+      @list = List.find_by_id(params[:id])
+    else
+      redirect_to lists_url
+    end
   end
 
   def update
     @list = List.find_by_id(params[:id])
     @list.title = params[:title]
-    @list.save
-    if params[:collaborator_id].present?
+    if params[:add_collaborator_id].present?
       check = Collaborator.find_all_by_list_id(params[:id])
       match = 0
       check.each do |collab|
-        if collab.user_id.to_s == params[:collaborator_id]
+        if collab.user_id.to_s == params[:add_collaborator_id]
           match = 1
         end
       end
       if match == 0
         @collaboration = Collaborator.new
         @collaboration.list_id = @list.id
-        @collaboration.user_id = User.find_by_id(params[:collaborator_id]).id
+        @collaboration.user_id = User.find_by_id(params[:add_collaborator_id]).id
         @collaboration.save
       end
+    end
+
+    if @list.collaborators.find_by_user_id(params[:x_collaborator_id]).present?
+      @list.collaborators.find_by_user_id(params[:x_collaborator_id]).destroy
     end
        
     if @list.save
@@ -73,6 +89,7 @@ class ListsController < ApplicationController
   def destroy
     @list = List.find_by_id(params[:id])
     @list.collaborators.destroy_all
+    @list.items.destroy_all
     @list.destroy
 
     redirect_to lists_url

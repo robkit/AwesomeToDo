@@ -26,7 +26,7 @@
       <td><%= User.find_by_id(item.user_id).nickname %></td>
       <td><%= Category.find_by_id(item.category_id).category %></td>
 
-      <td><a class="btn btn-primary" href=<%="#{item_url(item)}"%><%= link_to 'Done!', item_url(item), method: 'delete', data: { confirm: "Do you really want to delete this item?" } %></td>
+      <td><a class="btn btn-primary" <%=href="#{item_url(item)}"%><%= link_to 'Done!', item_url(item), method: 'delete', data: { confirm: "Do you really want to delete this item?" } %></td>
 
     </tr>
   <% end %>

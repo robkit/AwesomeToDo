@@ -3,7 +3,8 @@
 <%= form_tag(list_url(@list), method: 'put') do %>
 
   <p><%= label_tag "List Title" %><%= text_field_tag :title, @list.title %></p>
-  <p><%= label_tag 'Add Collaborator' %><%= select_tag :collaborator_id, options_from_collection_for_select(User.all, :id, :nickname), :include_blank => true %></p>
+  <p><%= label_tag 'Add Collaborator' %><%= select_tag :add_collaborator_id, options_from_collection_for_select(User.all, :id, :nickname), :include_blank => true %></p>
+  <p><%= label_tag 'Remove Collaborator' %><%= select_tag :x_collaborator_id, options_from_collection_for_select(User.all, :id, :nickname), :include_blank => true %></p>
 	
 	<ul class="nav nav-list"><h4>
 		<li class="nav-header">Current Collaborators:</li>

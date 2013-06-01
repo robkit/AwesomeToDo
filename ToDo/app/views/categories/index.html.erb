@@ -1,6 +1,4 @@
-<h1>Categories</h1>
-
-<p><%= link_to 'Add a New Category', new_category_url %></p>
+<h1>Manage Categories</h1>
 
 <table class="table table-bordered table-striped table-hover">
   <thead>
@@ -16,11 +14,13 @@
     <tr>
       <td><%= category.category %></td>
   
-      <td><%= link_to 'Edit', edit_category_url(category) %></td>
-      <td><%= link_to 'Delete', category_url(category), method: 'delete', data: { confirm: "Do you really want to delete this category?" } %></td>
+      <td><a class="btn btn-primary" <%=href="#{edit_category_url(category)}"%><%= link_to 'Edit', edit_category_url(category) %></td>
+      <td><a class="btn btn-danger" <%=href="#{category_url(category)}"%><%= link_to 'Delete', category_url(category), method: 'delete', data: { confirm: "Do you really want to delete this category?" } %></td>
 
     </tr>
   <% end %>
+
   </tbody>
 </table>
 
+<p><%= link_to '+ New Category', new_category_url %></p>

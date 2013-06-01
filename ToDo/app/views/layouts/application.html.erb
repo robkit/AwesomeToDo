@@ -22,8 +22,14 @@
         <div class="nav-collapse">
           <ul class="nav">
             <% if session[:user_id].present? %>
-              <li><%= link_to "My Lists", lists_url %></li>
-              <li><%= link_to "My Items", items_url %></li>
+              <% if User.find_by_id(session[:user_id]).name == "Admin" %>
+                <li><%= link_to "Manage Lists", lists_url %></li>
+                <li><%= link_to "Manage Accounts", users_url %></li>
+                <li><%= link_to "Manage Categories", categories_url %></li>
+              <% else %>  
+                <li><%= link_to "My Lists", lists_url %></li>
+                <li><%= link_to "My Items", items_url %></li>
+              <% end %>
               <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">My Profile <b class="caret"></b></a>
                 <ul class="dropdown-menu" id="swatch-menu">

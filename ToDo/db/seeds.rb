@@ -8,14 +8,16 @@
 
 
 User.destroy_all
-seedusers = [{name: "Rob Kittleson", nickname: "Robby", email: 'robkit@gmail.com', password: 'password' },
+seedusers = [{name: "Admin", nickname: "Admin", email: 'admin@awesometodo.com', password: 'admin' },
+      {name: "Rob Kittleson", nickname: "Robby", email: 'robkit@gmail.com', password: 'password' },
       {name: "Greg Weiss", nickname: "The Machine", email: 'gweiss2013@kellogg.northwestern.edu', password: 'password' },
       {name: "Boris", nickname: "Boris", email: 'boris@kellogg.northwestern.edu', password: 'password' },
       {name: "Jeff Cohen", nickname: "Jeff", email: 'jeff@kellogg.northwestern.edu', password: 'password' },
       {name: "Nick", nickname: "Nick", email: 'nick@kellogg.northwestern.edu', password: 'password' },
       {name: "Amanda", nickname: "Mandy", email: 'amanda@kellogg.northwestern.edu', password: 'password' },
       {name: "Josh", nickname: "Josh", email: 'josh@kellogg.northwestern.edu', password: 'password' },
-      {name: "Raghu", nickname: "Raghu", email: 'Raghu@kellogg.northwestern.edu', password: 'password' }]
+      {name: "Raghu", nickname: "Raghu", email: 'Raghu@kellogg.northwestern.edu', password: 'password' },
+      {name: "Aliza", nickname: "Ali", email: 'aliza@kellogg.northwestern.edu', password: 'password' }]
 
 seedusers.each do |newuser|
   u = User.new
