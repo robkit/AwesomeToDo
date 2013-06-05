@@ -18,8 +18,8 @@
       <td><%= user.name %></td>
       <td><%= user.nickname %></td>
       <td><%= user.email %></td>
-      <td><a class="btn btn-primary" <%=href="#{edit_user_url(user)}"%><%= link_to 'Edit', edit_user_url(user) %></td>
-      <td><a class="btn btn-danger" <%=href="#{user_url(user)}"%><%= link_to 'Delete', user_url(user), method: 'delete', data: { confirm: "Do you really want to delete this user?" } %></td>
+      <td><%= link_to 'Edit', edit_user_url(user), class: "btn btn-primary" %></td>
+      <td><%= link_to 'Delete', user_url(user), method: 'delete', data: { confirm: "Do you really want to delete this user?" }, class: "btn btn-danger"%></td>
 
     </tr>
   <% end %>

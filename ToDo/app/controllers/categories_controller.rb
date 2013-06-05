@@ -1,7 +1,7 @@
 class CategoriesController < ApplicationController
 
   def index
-    if session[:user_id].present? && User.find_by_id(session[:user_id]).name == "Admin"
+    if User.find_by_id(session[:user_id]).name == "Admin"
       @categories = Category.all
     else
       redirect_to lists_url
@@ -13,11 +13,7 @@ class CategoriesController < ApplicationController
   end
 
   def new
-    if session[:user_id].present?
-      @category = Category.new
-    else
-      redirect_to lists_url
-    end
+    @category = Category.new
   end
 
   def create
@@ -32,11 +28,11 @@ class CategoriesController < ApplicationController
   end
 
   def edit
-    if session[:user_id].present?
+    if User.find_by_id(session[:user_id]).name == "Admin"
       @category = Category.find_by_id(params[:id])
     else
       redirect_to lists_url
-    end
+    end 
   end
 
   def update
@@ -52,6 +48,10 @@ class CategoriesController < ApplicationController
 
   def destroy
     @category = Category.find_by_id(params[:id])
+    @category.items.each do |c|
+      c.category_id = Category.find_by_category(" ").id
+      c.save
+    end
     @category.destroy
     redirect_to categories_url
   end

@@ -11,13 +11,14 @@
 
   <tbody>
   <% @categories.each do |category| %>
-    <tr>
-      <td><%= category.category %></td>
-  
-      <td><a class="btn btn-primary" <%=href="#{edit_category_url(category)}"%><%= link_to 'Edit', edit_category_url(category) %></td>
-      <td><a class="btn btn-danger" <%=href="#{category_url(category)}"%><%= link_to 'Delete', category_url(category), method: 'delete', data: { confirm: "Do you really want to delete this category?" } %></td>
-
-    </tr>
+    <% unless category.category == "" %>
+      <tr>
+        <td><%= category.category %></td>
+    
+        <td><%= link_to 'Edit', edit_category_url(category), class: "btn btn-primary" %></td>
+        <td><%= link_to 'Delete', category_url(category), method: 'delete', data: { confirm: "Do you really want to delete this category?" }, class: "btn btn-danger" %></td>
+      </tr>
+    <% end %>
   <% end %>
 
   </tbody>

@@ -6,11 +6,11 @@
   <thead>
     <tr>
       <th>Task</th>
-      <!--<th>Duedate</th>
-      <th>Priority level</th>
+      <th></th>
+      <!--<th>Priority level</th>
       <th>Done?</th>
-      <th>List</th>-->
-      <th>Assigned to</th>
+      <th>List</th>
+      <th>Assigned to</th>-->
       <th>Assigned by</th>
       <th>Category</th>
       <th></th>
@@ -21,15 +21,15 @@
   <% @myitems.each do |item| %>
     <tr>
       <td><b><%= link_to item.task, edit_item_url(item) %></b></td>
-      <!--<td><%= item.due %></td>
-      <td><%= item.priority %></td>
+      <td><%= item.deadline %></td>
+      <!--<td><%= item.priority %></td>
       <td><%= item.status %></td>
-      <td><%= List.find_by_id(item.list_id).title %></td>-->
-      <td><%= User.find_by_id(item.collaborator_id).nickname %></td>
+      <td><%= List.find_by_id(item.list_id).title %></td>
+      <td><%= User.find_by_id(item.collaborator_id).nickname %></td>-->
       <td><%= User.find_by_id(item.user_id).nickname %></td>
       <td><%= Category.find_by_id(item.category_id).category %></td>
   
-      <td><a class="btn btn-primary" href=<%="#{item_url(item)}"%><%= link_to 'Done!', item_url(item), method: 'delete', data: { confirm: "Do you really want to delete this item?" } %></td>
+      <td><%= link_to 'Done!', item_url(item), method: 'delete', data: { confirm: "Do you really want to delete this item?" }, class: "btn btn-primary" %></td>
 
 
     </tr>
@@ -44,12 +44,12 @@
   <thead>
     <tr>
       <th>Task</th>
-      <!--<th>Duedate</th>
-      <th>Priority level</th>
+      <th></th>
+      <!--<th>Priority level</th>
       <th>Done?</th>
       <th>List</th>-->
       <th>Assigned to</th>
-      <th>Assigned by</th>
+      <!--<th>Assigned by</th>-->
       <th>Category</th>
       <th></th>
     </tr>
@@ -59,15 +59,15 @@
   <% @assigneditems.each do |item| %>
     <tr>
       <td><b><%= link_to item.task, edit_item_url(item) %></b></td>
-      <!--<td><%= item.due %></td>
-      <td><%= item.priority %></td>
+      <td><%= item.deadline %></td>
+      <!--<td><%= item.priority %></td>
       <td><%= item.status %></td>
       <td><%= List.find_by_id(item.list_id).title %></td>-->
       <td><%= User.find_by_id(item.collaborator_id).nickname %></td>
-      <td><%= User.find_by_id(item.user_id).nickname %></td>
+      <!--<td><%= User.find_by_id(item.user_id).nickname %></td>-->
       <td><%= Category.find_by_id(item.category_id).category %></td>
   
-      <td><a class="btn btn-primary" <%=href="#{item_url(item)}"%><%= link_to 'Done!', item_url(item), method: 'delete', data: { confirm: "Do you really want to delete this item?" } %></td>
+      <td><%= link_to 'Done!', item_url(item), method: 'delete', data: { confirm: "Do you really want to delete this item?" }, class: "btn btn-primary" %></td>
 
 
     </tr>

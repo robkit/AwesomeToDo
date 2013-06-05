@@ -54,7 +54,7 @@ puts "There are now #{Collaborator.count} collaborations in the database"
 
 
 Category.destroy_all
-seedcategories = [{category: "Coding"},{category: "Personal"},{category: "Classwork"}]
+seedcategories = [{category: ""},{category: "Coding"},{category: "Personal"},{category: "Classwork"}]
 
 seedcategories.each do |newcategory|
   c = Category.new
@@ -66,19 +66,19 @@ puts "There are now #{Category.count} categories in the database"
 
 
 Item.destroy_all
-seeditems = [{task: 'Build app framework', due: '', priority: '5', status: 1, list: 'Final Project', collaborator: 'Rob Kittleson', user: 'Rob Kittleson', category: 'Coding'},
-         	{task: 'Add bootstrap style', due: '', priority: '5', status: 1, list: 'Final Project', collaborator: 'Rob Kittleson', user: 'Rob Kittleson', category: 'Coding'},
-         	{task: 'Wash dishes', due: '', priority: '3', status: 0, list: 'Chores', collaborator: 'Amanda', user: 'Greg Weiss', category: 'Personal'},
-         	{task: 'Buy eggs', due: '', priority: '2', status: 0, list: 'Chores', collaborator: 'Josh', user: 'Greg Weiss', category: 'Personal'},
-     		{task: 'Make dinner', due: '', priority: '1', status: 1, list: 'Chores', collaborator: 'Nick', user: 'Rob Kittleson', category: 'Personal'},
-     		{task: 'Run around like a maniac', due: '', priority: '4', status: 0, list: 'June 2013', collaborator: 'Greg Weiss', user: 'Rob Kittleson', category: 'Personal'},
-     		{task: 'Finish business school', due: '', priority: '5', status: 0, list: 'June 2013', collaborator: 'Rob Kittleson', user: 'Rob Kittleson', category: 'Classwork'},
-     		{task: 'Whiteboard new features', due: '', priority: '1', status: 0, list: 'Final Project', collaborator: 'Greg Weiss', user: 'Rob Kittleson', category: 'Classwork'}]
+seeditems = [{task: 'Build app framework', due: '2013-5-23', priority: '5', status: 1, list: 'Final Project', collaborator: 'Rob Kittleson', user: 'Rob Kittleson', category: 'Coding'},
+         	{task: 'Add bootstrap style', due: '2013-5-25', priority: '5', status: 1, list: 'Final Project', collaborator: 'Rob Kittleson', user: 'Rob Kittleson', category: 'Coding'},
+         	{task: 'Wash dishes', due: '2013-6-4', priority: '3', status: 0, list: 'Chores', collaborator: 'Amanda', user: 'Greg Weiss', category: 'Personal'},
+         	{task: 'Buy eggs', due: '2013-6-8', priority: '2', status: 0, list: 'Chores', collaborator: 'Josh', user: 'Greg Weiss', category: 'Personal'},
+     		{task: 'Make dinner', due: '2013-6-8', priority: '1', status: 1, list: 'Chores', collaborator: 'Nick', user: 'Rob Kittleson', category: 'Personal'},
+     		{task: 'Run around like a maniac', due: '2013-6-22', priority: '4', status: 0, list: 'June 2013', collaborator: 'Greg Weiss', user: 'Rob Kittleson', category: 'Personal'},
+     		{task: 'Finish business school', due: '2013-6-21', priority: '5', status: 0, list: 'June 2013', collaborator: 'Rob Kittleson', user: 'Rob Kittleson', category: 'Classwork'},
+     		{task: 'Whiteboard new features', due: '2013-6-1', priority: '1', status: 0, list: 'Final Project', collaborator: 'Greg Weiss', user: 'Rob Kittleson', category: 'Classwork'}]
 
 seeditems.each do |newitem|
   t = Item.new
   t.task = newitem[:task]
-  t.due = newitem[:due]
+  t.due = Date.parse(newitem[:due])
   t.priority = newitem[:priority]
   t.status = newitem[:status]
   t.list_id = List.find_by_title(newitem[:list]).id

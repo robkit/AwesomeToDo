@@ -1,12 +1,8 @@
 class ItemsController < ApplicationController
 
   def index
-    if session[:user_id].present?
-      @myitems = Item.find_all_by_collaborator_id(session[:user_id])
-      @assigneditems = Item.find_all_by_user_id(session[:user_id])
-    else
-      redirect_to lists_url
-    end
+    @myitems = Item.find_all_by_collaborator_id(session[:user_id])
+    @assigneditems = Item.find_all_by_user_id(session[:user_id])
   end
 
   def show
@@ -14,26 +10,22 @@ class ItemsController < ApplicationController
   end
 
   def new
-    if session[:user_id].present?
-      @list = List.find_by_id(params[:id])
-      @collaborators= Array.new
-      count=0
-      @list.collaborators.each do |c|
-        listcollab=Hash.new
-        listcollab[:user_id] = c.user_id
-        listcollab[:nickname] = User.find_by_id(c.user_id).nickname
-        @collaborators[count] = listcollab
-        count = count + 1
-      end
-    else
-      redirect_to lists_url
+    @list = List.find_by_id(params[:id])
+    @collaborators= Array.new
+    count=0
+    @list.collaborators.each do |c|
+      listcollab=Hash.new
+      listcollab[:user_id] = c.user_id
+      listcollab[:nickname] = User.find_by_id(c.user_id).nickname
+      @collaborators[count] = listcollab
+      count += 1
     end
   end
 
   def create
     @item = Item.new
     @item.task = params[:task]
-    @item.due = params[:due]
+    @item.due = Date.civil(params[:duedate][:year].to_i, params[:duedate][:month].to_i, params[:duedate][:day].to_i)
     @item.priority = params[:priority]
     @item.status = 0
     @item.list_id = params[:list_id]
@@ -49,17 +41,13 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    if session[:user_id].present?
-      @item = Item.find_by_id(params[:id])
-    else
-      redirect_to lists_url
-    end
+    @item = Item.find_by_id(params[:id])
   end
 
   def update
     @item = Item.find_by_id(params[:id])
     @item.task = params[:task]
-    @item.due = params[:due]
+    @item.due = Date.civil(params[:duedate][:year].to_i, params[:duedate][:month].to_i, params[:duedate][:day].to_i)
     @item.priority = params[:priority]
     @item.status = params[:status]
     # @item.list_id = params[:list_id]

@@ -10,15 +10,15 @@
         </div>
     </div>
 
-    <!--
+    
 
     <div class="control-group">
       <label class="control-label"><%= label_tag :duedate %></label>
         <div class="controls">
-          <%= text_field_tag :due %>
+          <%= select_date Date.today, :prefix => :duedate %>
         </div>
     </div>
-
+<!--
     <div class="control-group">
       <label class="control-label"><%= label_tag 'Priority level' %></label>
         <div class="controls">
@@ -45,7 +45,18 @@
         </div>
     </div>
 
-          <%= hidden_field_tag :user_id, session[:user_id] %>
+     
+    <% if User.find_by_id(session[:user_id]).name == "Admin" %>
+      <div class="control-group">
+        <label class="control-label"><%= label_tag 'Assigned by' %></label>
+          <div class="controls">
+            <%= select_tag :user_id, options_from_collection_for_select(User.all, :id, :nickname) %>
+          </div>
+      </div>
+    <% else %>
+      <%= hidden_field_tag :user_id, session[:user_id] %>
+    <% end %>
+
 
     <div class="controls"><%= submit_tag "Create Item" %></div>
     

@@ -1,10 +1,14 @@
 class UsersController < ApplicationController
+  skip_before_filter :require_login, :only => [:new, :create, :about, :landing]
+
+  def landing
+  end
 
   def about
   end
 
   def index
-    if session[:user_id].present? && User.find_by_id(session[:user_id]).name == "Admin"
+    if User.find_by_id(session[:user_id]).name == "Admin"
       @users = User.all
     else
       redirect_to lists_url
@@ -12,11 +16,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    if session[:user_id].present?
-      @user = User.find_by_id(session[:user_id])
-    else
-      redirect_to lists_url
-    end 
+    @user = User.find_by_id(session[:user_id])
   end
 
   def new
@@ -39,14 +39,10 @@ class UsersController < ApplicationController
   end
 
   def edit
-    if session[:user_id].present?
-      if User.find_by_id(session[:user_id]).name == "Admin"
-        @user = User.find_by_id(params[:id])
-      else
-        @user = User.find_by_id(session[:user_id])
-      end
+    if User.find_by_id(session[:user_id]).name == "Admin"
+      @user = User.find_by_id(params[:id])
     else
-      redirect_to lists_url
+      @user = User.find_by_id(session[:user_id])
     end
   end
 
@@ -68,7 +64,7 @@ class UsersController < ApplicationController
     @user = User.find_by_id(params[:id])
     @user.collaborators.destroy_all
     @user.items.destroy_all
-    Item.find_all_by_collaborator_id(params[:id]).destroy_all
+    @user.assigned_items.destroy_all
     @user.destroy
     redirect_to users_url
   end

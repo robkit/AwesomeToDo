@@ -6,24 +6,16 @@ class ListsController < ApplicationController
   end
 
   def show
-    if session[:user_id].present?
-      @list = List.find_by_id(params[:id])
-    else
-      redirect_to lists_url
-    end
+    @list = List.find_by_id(params[:id])
   end
 
   def new
-    if session[:user_id].present?
-      @list = List.new
-    else
-      redirect_to lists_url
-    end
+    @list = List.new
   end
 
   def create
     if params[:collaborator_id].present? && params[:collaborator_id] == session[:user_id].to_s
-      redirect_to new_list_url, notice: "Stop playing with yourself!"
+      redirect_to new_list_url, notice: "Stop playing with yourself! You are already a collaborator on this list."
     else
       
       @list = List.new
@@ -40,7 +32,7 @@ class ListsController < ApplicationController
         @collaboration.save
       end
 
-      if @list.save  && @owner.save
+      if @list.save && @owner.save
         redirect_to lists_url
       else
         render 'new'
@@ -49,21 +41,16 @@ class ListsController < ApplicationController
   end
 
   def edit
-    if session[:user_id].present?
-      @list = List.find_by_id(params[:id])
-    else
-      redirect_to lists_url
-    end
+    @list = List.find_by_id(params[:id])
   end
 
   def update
     @list = List.find_by_id(params[:id])
     @list.title = params[:title]
     if params[:add_collaborator_id].present?
-      check = Collaborator.find_all_by_list_id(params[:id])
       match = 0
-      check.each do |collab|
-        if collab.user_id.to_s == params[:add_collaborator_id]
+      @list.collaborators.each do |check|
+        if check.user_id.to_s == params[:add_collaborator_id]
           match = 1
         end
       end

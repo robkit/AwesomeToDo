@@ -1,5 +1,7 @@
 ToDo::Application.routes.draw do
-  root :to => 'lists#index'
+  root :to => 'users#landing'
+
+  get '/landing', controller: 'users', action: 'landing', as: 'landing'
   
   get '/about', controller: 'users', action: 'about', as: 'about'
 
@@ -59,23 +61,6 @@ ToDo::Application.routes.draw do
   delete '/items/:id', controller: 'items', action: 'destroy'
   #------------------------------
 
-  # Routes for the Collaborator resource: REMOVED FOR NOW, MAY USE IN FUTURE FEATURES
-  # CREATE
-  # get '/collaborators/new', controller: 'collaborators', action: 'new', as: 'new_collaborator'
-  # post '/collaborators', controller: 'collaborators', action: 'create'
-
-  # # READ
-  # get '/collaborators', controller: 'collaborators', action: 'index', as: 'collaborators'
-  # get '/collaborators/:id', controller: 'collaborators', action: 'show', as: 'collaborator'
-
-  # # UPDATE
-  # get '/collaborators/:id/edit', controller: 'collaborators', action: 'edit', as: 'edit_collaborator'
-  # put '/collaborators/:id', controller: 'collaborators', action: 'update'
-
-  # # DELETE
-  # delete '/collaborators/:id', controller: 'collaborators', action: 'destroy'
-  #------------------------------
-
   # Routes for the User resource:
   # CREATE
   get '/users/new', controller: 'users', action: 'new', as: 'new_user'
@@ -91,5 +76,22 @@ ToDo::Application.routes.draw do
 
   # DELETE
   delete '/users/:id', controller: 'users', action: 'destroy'
+  #------------------------------
+
+  # Routes for the Collaborator resource: REMOVED FOR NOW, MAY USE IN FUTURE FEATURES
+  # CREATE
+  # get '/collaborators/new', controller: 'collaborators', action: 'new', as: 'new_collaborator'
+  # post '/collaborators', controller: 'collaborators', action: 'create'
+
+  # # READ
+  # get '/collaborators', controller: 'collaborators', action: 'index', as: 'collaborators'
+  # get '/collaborators/:id', controller: 'collaborators', action: 'show', as: 'collaborator'
+
+  # # UPDATE
+  # get '/collaborators/:id/edit', controller: 'collaborators', action: 'edit', as: 'edit_collaborator'
+  # put '/collaborators/:id', controller: 'collaborators', action: 'update'
+
+  # # DELETE
+  # delete '/collaborators/:id', controller: 'collaborators', action: 'destroy'
  
 end

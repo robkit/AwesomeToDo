@@ -1,12 +1,12 @@
 
 <h1><%= @list.title %></h1>
-      
+
 <table class="table table-bordered table-striped table-hover">
   <thead>
     <tr>
       <th>Task</th>
-      <!--<th>Duedate</th>
-      <th>Priority Level</th>
+      <th></th>
+      <!--<th>Priority Level</th>
       <th>Done?</th>-->
       <th>Assigned to</th>
       <th>Assigned by</th>
@@ -19,14 +19,14 @@
   <% @list.items.each do |item| %>
     <tr>
       <td><b><%= link_to item.task, edit_item_url(item) %></b></td>
-      <!--<td><%= item.due %></td>
-      <td><%= item.priority %></td>
+      <td><%= Item.find_by_id(item.id).deadline %></td>
+      <!--<td><%= item.priority %></td>
       <td><%= item.status %></td>-->
       <td><%= User.find_by_id(item.collaborator_id).nickname %></td>
       <td><%= User.find_by_id(item.user_id).nickname %></td>
       <td><%= Category.find_by_id(item.category_id).category %></td>
 
-      <td><a class="btn btn-primary" <%=href="#{item_url(item)}"%><%= link_to 'Done!', item_url(item), method: 'delete', data: { confirm: "Do you really want to delete this item?" } %></td>
+      <td><%= link_to 'Done!', item_url(item), method: 'delete', data: { confirm: "Do you really want to delete this item?" }, class: "btn btn-primary" %></td>
 
     </tr>
   <% end %>

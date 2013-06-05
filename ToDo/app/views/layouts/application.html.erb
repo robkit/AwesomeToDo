@@ -49,22 +49,7 @@
 
   <div class="container">
 
-    <% if session[:user_id].present? %>
-
-      <%= yield %>
-
-    <% else %>
-
-      <% if about_url || new_user_url || login_url %>
-        <%= yield %>
-      <% else %>
-        <h1>Welcome!</h1>
-        <p class="lead">AwesomeToDo helps you organize your life.</p>
-        <p class="lead">Sign Up or Login above to get started.</p>
-      <% end %>
-
-    <% end %>
-
+    <%= yield %>
 
     <% if flash[:notice] %>
     <div class="alert alert-error">
