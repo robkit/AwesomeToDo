@@ -1,8 +1,9 @@
 class ItemsController < ApplicationController
+  helper_method :sort_column, :sort_direction
 
   def index
-    @myitems = Item.find_all_by_collaborator_id(session[:user_id])
-    @assigneditems = Item.find_all_by_user_id(session[:user_id])
+    @myitems = Item.order(sort_column + " " + sort_direction).find_all_by_collaborator_id(session[:user_id])
+    @assigneditems = Item.order(sort_column + " " + sort_direction).find_all_by_user_id(session[:user_id])
   end
 
   def show

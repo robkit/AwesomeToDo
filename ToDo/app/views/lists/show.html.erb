@@ -4,22 +4,22 @@
 <table class="table table-bordered table-striped table-hover">
   <thead>
     <tr>
-      <th>Task</th>
-      <th></th>
+      <th><%= sortable "task" %></th>
+      <th><%= sortable "due" %></th>
       <!--<th>Priority Level</th>
       <th>Done?</th>-->
-      <th>Assigned to</th>
-      <th>Assigned by</th>
-      <th>Category</th>
+      <th><%= sortable "collaborator_id", "Assigned to" %></th>
+      <th><%= sortable "user_id", "Assigned by" %></th>
+      <th><%= sortable "category_id", "Category" %></th>
       <th></th>
     </tr>
   </thead>
 
   <tbody>
-  <% @list.items.each do |item| %>
+  <% @items.each do |item| %>
     <tr>
       <td><b><%= link_to item.task, edit_item_url(item) %></b></td>
-      <td><%= Item.find_by_id(item.id).deadline %></td>
+      <td><%= item.deadline %></td>
       <!--<td><%= item.priority %></td>
       <td><%= item.status %></td>-->
       <td><%= User.find_by_id(item.collaborator_id).nickname %></td>

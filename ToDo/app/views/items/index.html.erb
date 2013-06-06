@@ -5,14 +5,14 @@
 <table class="table table-bordered table-striped table-hover">
   <thead>
     <tr>
-      <th>Task</th>
-      <th></th>
-      <!--<th>Priority level</th>
+      <th><%= sortable "task" %></th>
+      <th><%= sortable "due" %></th>
+      <!--<th>Priority Level</th>
       <th>Done?</th>
       <th>List</th>
-      <th>Assigned to</th>-->
-      <th>Assigned by</th>
-      <th>Category</th>
+      <th><%= sortable "collaborator_id", "Assigned to" %></th>-->
+      <th><%= sortable "user_id", "Assigned by" %></th>
+      <th><%= sortable "category_id", "Category" %></th>
       <th></th>
     </tr>
   </thead>
@@ -43,14 +43,14 @@
 <table class="table table-bordered table-striped table-hover">
   <thead>
     <tr>
-      <th>Task</th>
-      <th></th>
-      <!--<th>Priority level</th>
+      <th><%= sortable "task" %></th>
+      <th><%= sortable "due" %></th>
+      <!--<th>Priority Level</th>
       <th>Done?</th>
       <th>List</th>-->
-      <th>Assigned to</th>
-      <!--<th>Assigned by</th>-->
-      <th>Category</th>
+      <th><%= sortable "collaborator_id", "Assigned to" %></th>
+      <!--<th><%= sortable "user_id", "Assigned by" %></th>-->
+      <th><%= sortable "category_id", "Category" %></th>
       <th></th>
     </tr>
   </thead>

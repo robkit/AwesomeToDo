@@ -1,4 +1,6 @@
 class ListsController < ApplicationController
+  helper_method :sort_column, :sort_direction
+
 
   def index
     @lists = List.all
@@ -7,6 +9,7 @@ class ListsController < ApplicationController
 
   def show
     @list = List.find_by_id(params[:id])
+    @items =@list.items.order(sort_column + " " + sort_direction)
   end
 
   def new
@@ -81,4 +84,5 @@ class ListsController < ApplicationController
 
     redirect_to lists_url
   end
+
 end
