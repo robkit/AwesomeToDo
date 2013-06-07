@@ -8,7 +8,7 @@ group :development, :test do
   gem 'sqlite3'
   gem "starter_generators", "0.5.2"
   #gem 'quiet_assets'
-  gem 'thin'
+  # gem 'thin'
 end
 
 group :production do
