@@ -31,7 +31,7 @@
     <div class="control-group">
       <label class="control-label"><%= label_tag :category_id %></label>
         <div class="controls">
-          <%= select_tag :category_id, options_from_collection_for_select(Category.all, :id, :category) %>
+          <%= select_tag :category_id, options_from_collection_for_select(Category.order('category asc'), :id, :category) %>
           <%= link_to 'Add a New Category', new_category_url %>
         </div>
     </div>
@@ -41,7 +41,7 @@
     <div class="control-group">
       <label class="control-label"><%= label_tag 'Assigned to' %></label>
         <div class="controls">
-          <%= select_tag :collaborator_id, options_from_collection_for_select(User.all, :id, :nickname) %>
+          <%= select_tag :collaborator_id, options_from_collection_for_select(@list.collaborators, :user_id, :nickname) %>
         </div>
     </div>
 
@@ -50,7 +50,7 @@
       <div class="control-group">
         <label class="control-label"><%= label_tag 'Assigned by' %></label>
           <div class="controls">
-            <%= select_tag :user_id, options_from_collection_for_select(User.all, :id, :nickname) %>
+            <%= select_tag :user_id, options_from_collection_for_select(User.order('nickname asc'), :id, :nickname) %>
           </div>
       </div>
     <% else %>

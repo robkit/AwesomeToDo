@@ -4,7 +4,7 @@
 <%= form_tag(lists_url, method: 'post') do %>
 
     <p><%= label_tag :title %><%= text_field_tag :title %></p>
-	<p><%= label_tag 'Add Collaborator' %><%= select_tag :collaborator_id, options_from_collection_for_select(User.all, :id, :nickname), :include_blank => true %></p>
+	<p><%= label_tag 'Add Collaborator' %><%= select_tag :collaborator_id, options_from_collection_for_select(User.order('nickname asc'), :id, :nickname), :include_blank => true %></p>
 
     <%= submit_tag "Create List" %>
 
